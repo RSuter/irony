@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <VersionPrefix>0.999.0</VersionPrefix>
-    <TargetFrameworks>net452;net461;netstandard1.6</TargetFrameworks>
+    <TargetFrameworks>net452;net461;netstandard1.3</TargetFrameworks>
     <AssemblyName>Irony</AssemblyName>
     <AssemblyOriginatorKeyFile>../../irony.snk</AssemblyOriginatorKeyFile>
     <SignAssembly>true</SignAssembly>

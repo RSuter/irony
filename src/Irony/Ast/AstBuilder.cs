@@ -17,6 +17,7 @@ using System.Text;
 using System.Reflection;
 using Irony.Parsing;
 using System.Reflection.Emit;
+using System.Linq.Expressions;
 
 namespace Irony.Ast {
 
@@ -106,13 +107,7 @@ namespace Irony.Ast {
 
     //Contributed by William Horner (wmh)
     private DefaultAstNodeCreator CompileDefaultNodeCreator(Type nodeType) {
-      ConstructorInfo constr = nodeType.GetConstructor(Type.EmptyTypes);
-      DynamicMethod method = new DynamicMethod("CreateAstNode", nodeType, Type.EmptyTypes);
-      ILGenerator il = method.GetILGenerator();
-      il.Emit(OpCodes.Newobj, constr);
-      il.Emit(OpCodes.Ret);
-      var result  = (DefaultAstNodeCreator) method.CreateDelegate(typeof(DefaultAstNodeCreator));
-      return result; 
+        return Expression.Lambda<DefaultAstNodeCreator>(Expression.New(nodeType)).Compile();
     }
 
 /*
